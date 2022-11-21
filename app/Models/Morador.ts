@@ -13,7 +13,7 @@ export default class Morador extends BaseModel {
   public apartamentoId: number
 
   @column()
-  public cpf: number
+  public cpf: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

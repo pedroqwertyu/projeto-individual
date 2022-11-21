@@ -13,7 +13,7 @@ export default class Sindico extends BaseModel {
   public cep: number
 
   @column()
-  public cpf: number
+  public cpf: string
 
 
   @column.dateTime({ autoCreate: true })
