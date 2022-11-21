@@ -1,7 +1,10 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import Condominio from 'App/Models/Condominio'
 
 export default class extends BaseSeeder {
   public async run () {
-    // Write your database queries inside the run method
+    await Condominio.createMany([
+      
+    ])
   }
 }
