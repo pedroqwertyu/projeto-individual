@@ -4,30 +4,8 @@ import Apartamento from "App/Models/Apartamento"
 import ApartamentoValidator from "App/Validators/ApartamentoValidator"
 
 export default class ApartamentosController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const { andarId, nome, tamanho } = await request.validade(ApartamentoValidator)
-
-        const apartamentos = Apartamento.query().preload('andar').select('id', 'nome', 'andarId', 'tamanho')
-
-        if (andarId) {
-            apartamentos.where('andarId', andarId)
-        }
-
-        if (id) {
-            apartamentos.where('id', id)
-        }
-
-        if (nome) {
-            apartamentos.where('nome', 'like', '%' + nome + '%')
-        }
-
-        if (tamanho) {
-            apartamentos.where('tamanho', 'like', '%' + tamanho + '%')
-        }
-        
-        return apartamentos
+    index() {
+        return Apartamento.query()
     }
 
     async store({ request }) {

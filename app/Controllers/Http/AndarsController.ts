@@ -4,26 +4,8 @@ import Andar from "App/Models/Andar"
 import AndarValidator from "App/Validators/AndarValidator"
 
 export default class AndarsController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const { blocoId, manutencao } = await request.validade(AndarValidator)
-
-        const andars = Andar.query().preload('bloco').select('id', 'manutencao', 'blocoId')
-
-        if (blocoId) {
-            andars.where('blocoId', blocoId)
-        }
-
-        if (id) {
-            andars.where('id', id)
-        }
-
-        if (manutencao) {
-            andars.where('manutencao', 'like', '%' + manutencao + '%')
-        }
-        
-        return andars
+    index() {
+        return Andar.query()
     }
 
     async store({ request }) {

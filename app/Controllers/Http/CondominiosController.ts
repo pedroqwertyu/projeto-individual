@@ -1,37 +1,12 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
+import Bloco from "App/Models/Bloco"
 import Condominio from "App/Models/Condominio"
 import CondominioValidator from "App/Validators/CondominioValidator"
 
 export default class CondominiosController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const { sindicoId, nome, endereco, cep } = await request.validade(CondominioValidator)
-
-        const condominios = Condominio.query().preload('sindico').select('id', 'nome', 'sindicoId', 'endereco', 'cep')
-
-        if (sindicoId) {
-            condominios.where('sindicoId', sindicoId)
-        }
-
-        if (id) {
-            condominios.where('id', id)
-        }
-
-        if (nome) {
-            condominios.where('nome', 'like', '%' + nome + '%')
-        }
-
-        if (endereco) {
-            condominios.where('endereco', 'like', '%' + endereco + '%')
-        }
-
-        if (cep) {
-            condominios.where('cep', 'like', cep + '%')
-        }
-        
-        return condominios
+    index() {
+        return Bloco.query()
     }
 
     async store({ request }) {

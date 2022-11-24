@@ -4,30 +4,8 @@ import Bloco from "App/Models/Bloco"
 import BlocoValidator from "App/Validators/BlocoValidator"
 
 export default class BlocosController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const { condominioId, nome, salao } = await request.validade(BlocoValidator)
-
-        const blocos = Bloco.query().preload('condominio').select('id', 'nome', 'condominioId', 'salao')
-
-        if (condominioId) {
-            blocos.where('condominioId', condominioId)
-        }
-
-        if (id) {
-            blocos.where('id', id)
-        }
-
-        if (nome) {
-            blocos.where('nome', 'like', '%' + nome + '%')
-        }
-
-        if (salao) {
-            blocos.where('salao', 'like', '%' + salao + '%')
-        }
-        
-        return blocos
+    index() {
+        return Bloco.query()
     }
 
     async store({ request }) {

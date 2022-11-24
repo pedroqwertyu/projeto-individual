@@ -4,30 +4,8 @@ import Morador from "App/Models/Morador"
 import MoradorValidator from "App/Validators/MoradorValidator"
 
 export default class MoradorsController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const { apartamentoId, nome, cpf } = await request.validade(MoradorValidator)
-
-        const moradors = Morador.query().preload('apartamento').select('id', 'nome', 'apartamentoId', 'cpf')
-
-        if (apartamentoId) {
-            moradors.where('apartamentoId', apartamentoId)
-        }
-
-        if (id) {
-            moradors.where('id', id)
-        }
-
-        if (nome) {
-            moradors.where('nome', 'like', '%' + nome + '%')
-        }
-
-        if (cpf) {
-            moradors.where('cpf', 'like', cpf + '%')
-        }
-        
-        return moradors
+    index() {
+        return Morador.query()
     }
 
     async store({ request }) {

@@ -24,9 +24,14 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.resource('/andars', 'AndarsController').apiOnly()
-Route.resource('/apartamentos', 'ApartamentosController').apiOnly()
-Route.resource('/blocos', 'BlocosController').apiOnly()
-Route.resource('/condominios', 'CondominiosController').apiOnly()
-Route.resource('/moradors', 'MoradorsController').apiOnly()
-Route.resource('/sindicos', 'SindicosController').apiOnly()
+Route.group(() => {
+  Route.resource('/andars', 'AndarsController').apiOnly()
+  Route.resource('/apartamentos', 'ApartamentosController').apiOnly()
+  Route.resource('/blocos', 'BlocosController').apiOnly()
+  Route.resource('/condominios', 'CondominiosController').apiOnly()
+  Route.resource('/moradors', 'MoradorsController').apiOnly()
+  Route.resource('/sindicos', 'SindicosController').apiOnly()
+}).middleware('auth')
+
+Route.post('/users', 'UsersController.store')
+Route.post('/login', 'UsersController.login')

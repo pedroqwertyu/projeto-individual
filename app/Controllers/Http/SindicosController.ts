@@ -4,30 +4,8 @@ import Sindico from "App/Models/Sindico"
 import SindicoValidator from "App/Validators/SindicoValidator"
 
 export default class SindicosController {
-    async index({ request }) {
-
-        const id = request.param('id')
-        const { cep, nome, cpf } = await request.validade(SindicoValidator)
-
-        const sindicos = Sindico.query().preload('condominios').select('id', 'nome', 'cep', 'cpf')
-
-        if (id) {
-            sindicos.where('id', id)
-        }
-        
-        if (cep) {
-            sindicos.where('cep', 'like', cep + '%')
-        }
-
-        if (nome) {
-            sindicos.where('nome', 'like', '%' + nome + '%')
-        }
-
-        if (cpf) {
-            sindicos.where('cpf', 'like', cpf + '%')
-        }
-        
-        return sindicos
+    index() {
+        return Sindico.query()
     }
 
     async store({ request }) {
