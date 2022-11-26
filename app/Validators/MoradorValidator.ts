@@ -1,4 +1,4 @@
-import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class MoradorValidator {
@@ -24,8 +24,14 @@ export default class MoradorValidator {
    *    ```
    */
   public schema = schema.create({
-    nome: schema.string(),
-    apartamentoId: schema.number(),
+    nome: schema.string([
+      rules.unique({table: 'moradors', column: 'nome'}),
+      rules.alpha(),
+      rules.maxLength(50)
+    ]),
+    apartamentoId: schema.number([
+      rules.exists({table: 'moradors', column: 'apartamentoId'})
+    ]),
     cpf: schema.string(),
   })
 
