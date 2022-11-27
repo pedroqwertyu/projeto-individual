@@ -5,12 +5,12 @@ import ApartamentoValidator from "App/Validators/ApartamentoValidator"
 
 export default class ApartamentosController {
     index() {
-        return Apartamento.query()
+        return Apartamento.query().preload('moradors')
     }
 
     async store({ request }) {
 
-        const dados = await request.validade(ApartamentoValidator)
+        const dados = await request.validate(ApartamentoValidator)
 
         return Apartamento.create(dados)
 
@@ -36,7 +36,7 @@ export default class ApartamentosController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = await request.validade(ApartamentoValidator)
+        const dados = await request.validate(ApartamentoValidator)
         const apartamento = await Apartamento.findOrFail(id)
 
         apartamento.merge(dados)

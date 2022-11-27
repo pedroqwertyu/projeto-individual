@@ -25,11 +25,13 @@ export default class AndarValidator {
    */
   public schema = schema.create({
     blocoId: schema.number([
-      rules.exists({table: 'andars', column: 'blocoId'})
+      rules.exists({table: 'andars', column: 'bloco_id'})
     ]),
     manutencao: schema.string([
       rules.maxLength(50),
-      rules.alpha(),
+      rules.alpha({
+        allow: ['space']
+      }),
       rules.unique({ table: 'andars', column: 'manutencao'})
     ]),
   })

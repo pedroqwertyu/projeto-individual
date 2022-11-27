@@ -5,12 +5,12 @@ import AndarValidator from "App/Validators/AndarValidator"
 
 export default class AndarsController {
     index() {
-        return Andar.query()
+        return Andar.query().preload('apartamentos')
     }
 
     async store({ request }) {
 
-        const dados = await request.validade(AndarValidator)
+        const dados = await request.validate(AndarValidator)
 
         return Andar.create(dados)
 
@@ -36,7 +36,7 @@ export default class AndarsController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = await request.validade(AndarValidator)
+        const dados = await request.validate(AndarValidator)
         const andar = await Andar.findOrFail(id)
 
         andar.merge(dados)

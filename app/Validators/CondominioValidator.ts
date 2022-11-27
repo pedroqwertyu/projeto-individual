@@ -2,7 +2,7 @@ import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class CondominioValidator {
-  constructor(protected ctx: HttpContextContract) {}
+  constructor(protected ctx: HttpContextContract) { }
 
   /*
    * Define schema to validate the "shape", "type", "formatting" and "integrity" of data.
@@ -29,18 +29,21 @@ export default class CondominioValidator {
       rules.alpha({
         allow: ['space']
       }),
-      rules.unique({ table: 'condominios', column: 'nome'})
+      rules.unique({ table: 'condominios', column: 'nome' })
     ]),
     endereco: schema.string.optional([
       rules.maxLength(100),
       rules.alphaNum({
         allow: ['space']
       }),
-      rules.unique({ table: 'condominios', column: 'endereco'})
+      rules.unique({ table: 'condominios', column: 'endereco' })
     ]),
-    cep: schema.number(),
+    cep: schema.number([
+      rules.unique({ table: 'condominios', column: 'cep' }),
+      rules.maxLength(8)
+    ]),
     sindicoId: schema.number([
-      rules.exists({table: 'condominios', column: 'sindicoId'})
+      rules.exists({ table: 'condominios', column: 'sindico_id' })
     ]),
   })
 

@@ -5,12 +5,12 @@ import MoradorValidator from "App/Validators/MoradorValidator"
 
 export default class MoradorsController {
     index() {
-        return Morador.query()
+        return Morador.query().preload('apartamento')
     }
 
     async store({ request }) {
 
-        const dados = await request.validade(MoradorValidator)
+        const dados = await request.validate(MoradorValidator)
 
         return Morador.create(dados)
 
@@ -36,7 +36,7 @@ export default class MoradorsController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = await request.validade(MoradorValidator)
+        const dados = await request.validate(MoradorValidator)
         const morador = await Morador.findOrFail(id)
 
         morador.merge(dados)

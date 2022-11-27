@@ -5,12 +5,12 @@ import BlocoValidator from "App/Validators/BlocoValidator"
 
 export default class BlocosController {
     index() {
-        return Bloco.query()
+        return Bloco.query().preload('andars')
     }
 
     async store({ request }) {
 
-        const dados = await request.validade(BlocoValidator)
+        const dados = await request.validate(BlocoValidator)
 
         return Bloco.create(dados)
 
@@ -36,7 +36,7 @@ export default class BlocosController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = await request.validade(BlocoValidator)
+        const dados = await request.validate(BlocoValidator)
         const bloco = await Bloco.findOrFail(id)
 
         bloco.merge(dados)

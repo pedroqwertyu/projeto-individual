@@ -25,11 +25,16 @@ export default class SindicoValidator {
    */
   public schema = schema.create({
     nome: schema.string([
-      rules.unique({table: 'moradors', column: 'nome'}),
-      rules.alpha(),
+      rules.unique({table: 'sindicos', column: 'nome'}),
+      rules.alpha({
+        allow: ['space']
+      }),
       rules.maxLength(50)
     ]),
-    cep: schema.number(),
+    cep: schema.number([
+      rules.unique({ table: 'sindicos', column: 'cep' }),
+      rules.maxLength(8)
+    ]),
     cpf: schema.string()
   })
 

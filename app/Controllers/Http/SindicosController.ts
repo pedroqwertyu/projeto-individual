@@ -5,12 +5,12 @@ import SindicoValidator from "App/Validators/SindicoValidator"
 
 export default class SindicosController {
     index() {
-        return Sindico.query()
+        return Sindico.query().preload('condominios')
     }
 
     async store({ request }) {
 
-        const dados = await request.validade(SindicoValidator)
+        const dados = await request.validate(SindicoValidator)
 
         return Sindico.create(dados)
 
@@ -36,7 +36,7 @@ export default class SindicosController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = await request.validade(SindicoValidator)
+        const dados = await request.validate(SindicoValidator)
         const sindico = await Sindico.findOrFail(id)
 
         sindico.merge(dados)

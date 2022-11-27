@@ -30,7 +30,7 @@ export default class ApartamentoValidator {
       rules.unique({ table: 'apartamentos', column: 'nome'})
     ]),
     andarId: schema.number([
-      rules.exists({table: 'apartamentos', column: 'andarId'})
+      rules.exists({table: 'apartamentos', column: 'andar_id'})
     ]),
     tamanho: schema.string([
       rules.maxLength(50),

@@ -26,11 +26,13 @@ export default class MoradorValidator {
   public schema = schema.create({
     nome: schema.string([
       rules.unique({table: 'moradors', column: 'nome'}),
-      rules.alpha(),
+      rules.alpha({
+        allow: ['space']
+      }),
       rules.maxLength(50)
     ]),
     apartamentoId: schema.number([
-      rules.exists({table: 'moradors', column: 'apartamentoId'})
+      rules.exists({table: 'moradors', column: 'apartamento_id'})
     ]),
     cpf: schema.string(),
   })

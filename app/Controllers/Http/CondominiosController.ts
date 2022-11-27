@@ -1,17 +1,16 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Bloco from "App/Models/Bloco"
 import Condominio from "App/Models/Condominio"
 import CondominioValidator from "App/Validators/CondominioValidator"
 
 export default class CondominiosController {
     index() {
-        return Bloco.query()
+        return Condominio.query().preload('blocos')
     }
 
     async store({ request }) {
 
-        const dados = await request.validade(CondominioValidator)
+        const dados = await request.validate(CondominioValidator)
 
         return Condominio.create(dados)
 
@@ -37,7 +36,7 @@ export default class CondominiosController {
     async update({ request }) {
 
         const id = request.param('id')
-        const dados = await request.validade(CondominioValidator)
+        const dados = await request.validate(CondominioValidator)
         const condominio = await Condominio.findOrFail(id)
 
         condominio.merge(dados)
