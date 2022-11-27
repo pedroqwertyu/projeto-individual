@@ -5,7 +5,7 @@ import AndarValidator from "App/Validators/AndarValidator"
 
 export default class AndarsController {
     index() {
-        return Andar.query().preload('apartamentos')
+        return Andar.query().preload('bloco').preload('apartamentos')
     }
 
     async store({ request }) {

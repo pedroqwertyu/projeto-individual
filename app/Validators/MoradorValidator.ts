@@ -32,9 +32,13 @@ export default class MoradorValidator {
       rules.maxLength(50)
     ]),
     apartamentoId: schema.number([
-      rules.exists({table: 'moradors', column: 'apartamento_id'})
+      rules.exists({table: 'apartamentos', column: 'id'})
     ]),
-    cpf: schema.string(),
+    cpf: schema.string([
+      rules.unique({table: 'moradors', column: 'cpf'}),
+      rules.maxLength(11),
+      rules.minLength(11)
+    ]),
   })
 
   /**

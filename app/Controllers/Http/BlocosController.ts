@@ -5,7 +5,7 @@ import BlocoValidator from "App/Validators/BlocoValidator"
 
 export default class BlocosController {
     index() {
-        return Bloco.query().preload('andars')
+        return Bloco.query().preload('condominio').preload('andars')
     }
 
     async store({ request }) {

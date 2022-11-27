@@ -33,9 +33,12 @@ export default class SindicoValidator {
     ]),
     cep: schema.number([
       rules.unique({ table: 'sindicos', column: 'cep' }),
-      rules.maxLength(8)
     ]),
-    cpf: schema.string()
+    cpf: schema.string([
+      rules.unique({table: 'moradors', column: 'cpf'}),
+      rules.maxLength(11),
+      rules.minLength(11)
+    ])
   })
 
   /**

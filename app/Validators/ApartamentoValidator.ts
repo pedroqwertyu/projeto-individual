@@ -26,11 +26,13 @@ export default class ApartamentoValidator {
   public schema = schema.create({
     nome: schema.string([
       rules.maxLength(50),
-      rules.alphaNum(),
+      rules.alphaNum({
+        allow: ['space']
+      }),
       rules.unique({ table: 'apartamentos', column: 'nome'})
     ]),
     andarId: schema.number([
-      rules.exists({table: 'apartamentos', column: 'andar_id'})
+      rules.exists({table: 'andars', column: 'id'})
     ]),
     tamanho: schema.string([
       rules.maxLength(50),

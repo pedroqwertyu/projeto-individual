@@ -40,10 +40,9 @@ export default class CondominioValidator {
     ]),
     cep: schema.number([
       rules.unique({ table: 'condominios', column: 'cep' }),
-      rules.maxLength(8)
     ]),
     sindicoId: schema.number([
-      rules.exists({ table: 'condominios', column: 'sindico_id' })
+      rules.exists({ table: 'sindicos', column: 'id' })
     ]),
   })
 

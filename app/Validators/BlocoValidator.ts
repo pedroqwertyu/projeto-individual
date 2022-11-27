@@ -27,10 +27,9 @@ export default class BlocoValidator {
     nome: schema.string([
       rules.maxLength(2),
       rules.alphaNum(),
-      rules.unique({ table: 'blocos', column: 'nome'})
     ]),
     condominioId: schema.number([
-      rules.exists({table: 'blocos', column: 'condominio_id'})
+      rules.exists({table: 'condominios', column: 'id'})
     ]),
     salao: schema.string([
       rules.maxLength(20)

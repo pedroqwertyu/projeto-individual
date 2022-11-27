@@ -25,7 +25,7 @@ export default class AndarValidator {
    */
   public schema = schema.create({
     blocoId: schema.number([
-      rules.exists({table: 'andars', column: 'bloco_id'})
+      rules.exists({table: 'blocos', column: 'id'})
     ]),
     manutencao: schema.string([
       rules.maxLength(50),

@@ -5,7 +5,7 @@ import ApartamentoValidator from "App/Validators/ApartamentoValidator"
 
 export default class ApartamentosController {
     index() {
-        return Apartamento.query().preload('moradors')
+        return Apartamento.query().preload('andar').preload('moradors')
     }
 
     async store({ request }) {

@@ -5,7 +5,7 @@ import CondominioValidator from "App/Validators/CondominioValidator"
 
 export default class CondominiosController {
     index() {
-        return Condominio.query().preload('blocos')
+        return Condominio.query().preload('sindico').preload('blocos')
     }
 
     async store({ request }) {
